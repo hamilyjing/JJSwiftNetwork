@@ -10,6 +10,8 @@
 		289026BD1E56D8E900932F3A /* JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */; };
 		289026C21E56D8E900932F3A /* JJSwiftNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */; };
 		289026C41E56D8E900932F3A /* JJSwiftNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 289026B61E56D8E900932F3A /* JJSwiftNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		289026CE1E56DFA900932F3A /* JJSBaseNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026CD1E56DFA900932F3A /* JJSBaseNetwork.swift */; };
+		BC04C2C9E80A2688D4413E2A /* Pods_JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +25,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B452084CDDE5A98946AD994 /* Pods-JJSwiftNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetwork/Pods-JJSwiftNetwork.debug.xcconfig"; sourceTree = "<group>"; };
+		24769B8C14F3FA2A2A4D7AA4 /* Pods-JJSwiftNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetwork/Pods-JJSwiftNetwork.release.xcconfig"; sourceTree = "<group>"; };
 		289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289026B61E56D8E900932F3A /* JJSwiftNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJSwiftNetwork.h; sourceTree = "<group>"; };
 		289026B71E56D8E900932F3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		289026BC1E56D8E900932F3A /* JJSwiftNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JJSwiftNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JJSwiftNetworkTests.swift; sourceTree = "<group>"; };
 		289026C31E56D8E900932F3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		289026CD1E56DFA900932F3A /* JJSBaseNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSBaseNetwork.swift; sourceTree = "<group>"; };
+		71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC04C2C9E80A2688D4413E2A /* Pods_JJSwiftNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,12 +57,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		090010BFD41B70A866E71FFC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1B452084CDDE5A98946AD994 /* Pods-JJSwiftNetwork.debug.xcconfig */,
+				24769B8C14F3FA2A2A4D7AA4 /* Pods-JJSwiftNetwork.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		289026A91E56D8E900932F3A = {
 			isa = PBXGroup;
 			children = (
 				289026B51E56D8E900932F3A /* JJSwiftNetwork */,
 				289026C01E56D8E900932F3A /* JJSwiftNetworkTests */,
 				289026B41E56D8E900932F3A /* Products */,
+				090010BFD41B70A866E71FFC /* Pods */,
+				E1193A7B4D93C16AFCE45672 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +91,7 @@
 			children = (
 				289026B61E56D8E900932F3A /* JJSwiftNetwork.h */,
 				289026B71E56D8E900932F3A /* Info.plist */,
+				289026CD1E56DFA900932F3A /* JJSBaseNetwork.swift */,
 			);
 			path = JJSwiftNetwork;
 			sourceTree = "<group>";
@@ -84,6 +103,14 @@
 				289026C31E56D8E900932F3A /* Info.plist */,
 			);
 			path = JJSwiftNetworkTests;
+			sourceTree = "<group>";
+		};
+		E1193A7B4D93C16AFCE45672 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,10 +131,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 289026C71E56D8E900932F3A /* Build configuration list for PBXNativeTarget "JJSwiftNetwork" */;
 			buildPhases = (
+				76DC41F28596F665F0028221 /* [CP] Check Pods Manifest.lock */,
 				289026AE1E56D8E900932F3A /* Sources */,
 				289026AF1E56D8E900932F3A /* Frameworks */,
 				289026B01E56D8E900932F3A /* Headers */,
 				289026B11E56D8E900932F3A /* Resources */,
+				2E4F23A4A2EB4968110DF77C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,6 +177,7 @@
 				TargetAttributes = {
 					289026B21E56D8E900932F3A = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					289026BB1E56D8E900932F3A = {
@@ -191,11 +221,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2E4F23A4A2EB4968110DF77C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JJSwiftNetwork/Pods-JJSwiftNetwork-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76DC41F28596F665F0028221 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		289026AE1E56D8E900932F3A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289026CE1E56DFA900932F3A /* JJSBaseNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +383,9 @@
 		};
 		289026C81E56D8E900932F3A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B452084CDDE5A98946AD994 /* Pods-JJSwiftNetwork.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -331,13 +397,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jianjing.JJSwiftNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		289026C91E56D8E900932F3A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24769B8C14F3FA2A2A4D7AA4 /* Pods-JJSwiftNetwork.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -356,6 +425,7 @@
 		289026CB1E56D8E900932F3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JJSwiftNetworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jianjing.JJSwiftNetworkTests;
@@ -367,6 +437,7 @@
 		289026CC1E56D8E900932F3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JJSwiftNetworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jianjing.JJSwiftNetworkTests;
@@ -394,6 +465,7 @@
 				289026C91E56D8E900932F3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		289026CA1E56D8E900932F3A /* Build configuration list for PBXNativeTarget "JJSwiftNetworkTests" */ = {
 			isa = XCConfigurationList;
@@ -402,6 +474,7 @@
 				289026CC1E56D8E900932F3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
