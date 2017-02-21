@@ -10,13 +10,12 @@ import UIKit
 
 import Alamofire
 
-public class JJSBaseNetwork: NSObject {
-    
+public class JJSBaseNetwork {
     var successCompletionBlock: ((JJSBaseNetwork) -> Void)?
     var failureCompletionBlock: ((JJSBaseNetwork) -> Void)?
 
-    var hostURL: String!
-    var pathURL: String?
+    var hostURL: String! = ""
+    var pathURL: String! = ""
     var parameters: [String: Any]?
     var httpHeaders: [String: String]?
     
@@ -24,13 +23,13 @@ public class JJSBaseNetwork: NSObject {
     
     var response: HTTPURLResponse?
     var responseStatusCode: Int { return (self.response?.statusCode)! }
-    var responseString: String?
+    private var responseString: String?
     var responseError: Error?
     
     var responseHeaders: [String: String] = [:]
     
     open func start() {
-        let request = Alamofire.request("https://httpbin.org/delete", method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeaders)
+        let request = Alamofire.request(buildRequestURL(), method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeaders)
         
         let requestComplete: (HTTPURLResponse?, Result<String>) -> Void = { response, result in
             self.handleRequestResult(response, result)
@@ -53,15 +52,18 @@ public class JJSBaseNetwork: NSObject {
         
     }
     
+    open func filterResponseString() -> String? {
+        return self.responseString
+    }
+    
     func buildRequestURL() -> String {
-        return ""
+        return hostURL
     }
     
     func handleRequestResult(_ response: HTTPURLResponse?, _ result: Result<String>) {
         
         self.responseString = result.value
         self.responseError = result.error
-        
         
         self.response = response
         if let response = self.response {
