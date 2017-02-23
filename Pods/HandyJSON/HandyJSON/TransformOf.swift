@@ -1,7 +1,12 @@
 //
-//  DispatchQueue+Alamofire.swift
+//  TransformOf.swift
+//  ObjectMapper
 //
-//  Copyright (c) 2014-2016 Alamofire Software Foundation (http://alamofire.org/)
+//  Created by Syo Ikeda on 1/23/15.
+//
+//  The MIT License (MIT)
+//
+//  Copyright (c) 2014-2016 Hearst
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +25,24 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-//
 
-import Dispatch
-import Foundation
+open class TransformOf<ObjectType, JSONType>: TransformType {
+	public typealias Object = ObjectType
+	public typealias JSON = JSONType
 
-extension DispatchQueue {
-    static var userInteractive: DispatchQueue { return DispatchQueue.global(qos: .userInteractive) }
-    static var userInitiated: DispatchQueue { return DispatchQueue.global(qos: .userInitiated) }
-    static var utility: DispatchQueue { return DispatchQueue.global(qos: .utility) }
-    static var background: DispatchQueue { return DispatchQueue.global(qos: .background) }
+	private let fromJSON: (JSONType?) -> ObjectType?
+	private let toJSON: (ObjectType?) -> JSONType?
 
-    func after(_ delay: TimeInterval, execute closure: @escaping () -> Void) {
-        asyncAfter(deadline: .now() + delay, execute: closure)
-    }
+	public init(fromJSON: @escaping(JSONType?) -> ObjectType?, toJSON: @escaping(ObjectType?) -> JSONType?) {
+		self.fromJSON = fromJSON
+		self.toJSON = toJSON
+	}
+
+	open func transformFromJSON(_ value: Any?) -> ObjectType? {
+		return fromJSON(value as? JSONType)
+	}
+
+	open func transformToJSON(_ value: ObjectType?) -> JSONType? {
+		return toJSON(value)
+	}
 }

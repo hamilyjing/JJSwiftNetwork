@@ -1,7 +1,12 @@
 //
-//  DispatchQueue+Alamofire.swift
+//  DateFormatterTransform.swift
+//  ObjectMapper
 //
-//  Copyright (c) 2014-2016 Alamofire Software Foundation (http://alamofire.org/)
+//  Created by Tristan Himmelman on 2015-03-09.
+//
+//  The MIT License (MIT)
+//
+//  Copyright (c) 2014-2016 Hearst
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +25,30 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-//
 
-import Dispatch
 import Foundation
 
-extension DispatchQueue {
-    static var userInteractive: DispatchQueue { return DispatchQueue.global(qos: .userInteractive) }
-    static var userInitiated: DispatchQueue { return DispatchQueue.global(qos: .userInitiated) }
-    static var utility: DispatchQueue { return DispatchQueue.global(qos: .utility) }
-    static var background: DispatchQueue { return DispatchQueue.global(qos: .background) }
+open class DateFormatterTransform: TransformType {
+	public typealias Object = Date
+	public typealias JSON = String
 
-    func after(_ delay: TimeInterval, execute closure: @escaping () -> Void) {
-        asyncAfter(deadline: .now() + delay, execute: closure)
-    }
+	public let dateFormatter: DateFormatter
+
+	public init(dateFormatter: DateFormatter) {
+		self.dateFormatter = dateFormatter
+	}
+
+	open func transformFromJSON(_ value: Any?) -> Date? {
+		if let dateString = value as? String {
+			return dateFormatter.date(from: dateString)
+		}
+		return nil
+	}
+
+	open func transformToJSON(_ value: Date?) -> String? {
+		if let date = value {
+			return dateFormatter.string(from: date)
+		}
+		return nil
+	}
 }
