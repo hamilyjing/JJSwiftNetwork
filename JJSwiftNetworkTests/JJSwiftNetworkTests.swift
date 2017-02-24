@@ -7,9 +7,22 @@
 //
 
 import XCTest
+
+import HandyJSON
+
 @testable import JJSwiftNetwork
 
+class JJWeatherModel: HandyJSON {
+    
+    var errNum: Int64?
+    var errMsg: String?
+    
+    required init() {}
+}
+
 class JJSwiftNetworkTests: XCTestCase {
+    
+    let timeout: TimeInterval = 30.0
     
     override func setUp() {
         super.setUp()
@@ -24,6 +37,26 @@ class JJSwiftNetworkTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let expectation = self.expectation(description: "myExpectation")
+        
+        let network = JJSNetwork<JJWeatherModel1>()
+        network.hostURL = "https://apis.baidu.com/showapi_open_bus/weather_showapi/areaid"
+        network.isSaveToDisk = true
+        network.successCompletionBlock = { baseNetwork in
+            print("123")
+            if let weather = JSONDeserializer<JJWeatherModel>.deserializeFrom(json: baseNetwork.filterResponseString()) {
+                print("------------- " + weather.toJSONString()!)
+            }
+            expectation.fulfill()
+        }
+        network.failureCompletionBlock = { baseNetwork in
+            print("789")
+            expectation.fulfill()
+        }
+        network.start()
+        
+        waitForExpectations(timeout: timeout)
     }
     
     func testPerformanceExample() {

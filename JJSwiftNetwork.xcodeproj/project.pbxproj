@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		152A746892025807E807DCC3 /* Pods_JJSwiftNetworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE62BB6966FF4CEAF1AC1B2A /* Pods_JJSwiftNetworkTests.framework */; };
 		289026BD1E56D8E900932F3A /* JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */; };
 		289026C21E56D8E900932F3A /* JJSwiftNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */; };
 		289026C41E56D8E900932F3A /* JJSwiftNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 289026B61E56D8E900932F3A /* JJSwiftNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		1B452084CDDE5A98946AD994 /* Pods-JJSwiftNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetwork/Pods-JJSwiftNetwork.debug.xcconfig"; sourceTree = "<group>"; };
+		1E6BADC4ABBE97AD36086F99 /* Pods-JJSwiftNetworkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetworkTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetworkTests/Pods-JJSwiftNetworkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		24769B8C14F3FA2A2A4D7AA4 /* Pods-JJSwiftNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetwork/Pods-JJSwiftNetwork.release.xcconfig"; sourceTree = "<group>"; };
 		289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289026B61E56D8E900932F3A /* JJSwiftNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJSwiftNetwork.h; sourceTree = "<group>"; };
@@ -39,6 +41,8 @@
 		28DF21BF1E5FCE4900D8E11F /* JJSNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetwork.swift; sourceTree = "<group>"; };
 		28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkBaseObject.swift; sourceTree = "<group>"; };
 		71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9445FC887F4C649A488CBCF /* Pods-JJSwiftNetworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetworkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetworkTests/Pods-JJSwiftNetworkTests.release.xcconfig"; sourceTree = "<group>"; };
+		DE62BB6966FF4CEAF1AC1B2A /* Pods_JJSwiftNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				289026BD1E56D8E900932F3A /* JJSwiftNetwork.framework in Frameworks */,
+				152A746892025807E807DCC3 /* Pods_JJSwiftNetworkTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,8 @@
 			children = (
 				1B452084CDDE5A98946AD994 /* Pods-JJSwiftNetwork.debug.xcconfig */,
 				24769B8C14F3FA2A2A4D7AA4 /* Pods-JJSwiftNetwork.release.xcconfig */,
+				1E6BADC4ABBE97AD36086F99 /* Pods-JJSwiftNetworkTests.debug.xcconfig */,
+				B9445FC887F4C649A488CBCF /* Pods-JJSwiftNetworkTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -115,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */,
+				DE62BB6966FF4CEAF1AC1B2A /* Pods_JJSwiftNetworkTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,9 +165,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 289026CA1E56D8E900932F3A /* Build configuration list for PBXNativeTarget "JJSwiftNetworkTests" */;
 			buildPhases = (
+				C146A80263BD995F67C2ED9A /* [CP] Check Pods Manifest.lock */,
 				289026B81E56D8E900932F3A /* Sources */,
 				289026B91E56D8E900932F3A /* Frameworks */,
 				289026BA1E56D8E900932F3A /* Resources */,
+				C62C37703A797C547EE6AF35 /* [CP] Embed Pods Frameworks */,
+				E18C13A7E1C2D151CB588CF1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,6 +267,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C146A80263BD995F67C2ED9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C62C37703A797C547EE6AF35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JJSwiftNetworkTests/Pods-JJSwiftNetworkTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E18C13A7E1C2D151CB588CF1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JJSwiftNetworkTests/Pods-JJSwiftNetworkTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -432,6 +488,7 @@
 		};
 		289026CB1E56D8E900932F3A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E6BADC4ABBE97AD36086F99 /* Pods-JJSwiftNetworkTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JJSwiftNetworkTests/Info.plist;
@@ -444,6 +501,7 @@
 		};
 		289026CC1E56D8E900932F3A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9445FC887F4C649A488CBCF /* Pods-JJSwiftNetworkTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JJSwiftNetworkTests/Info.plist;

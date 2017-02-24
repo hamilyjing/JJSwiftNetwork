@@ -8,7 +8,20 @@
 
 import UIKit
 
-class JJSNetwork: JJSBaseNetwork {
+import HandyJSON
+import SwiftyJSON
+
+class JJWeatherModel1: JJSNetworkBaseObject, HandyJSON {
+    
+    var errNum: Int64?
+    var errMsg: String?
+    
+    required override init() {}
+}
+
+class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
+    
+    var objectClass: JJSNetworkBaseObjectProtocol?
     
     var isSaveToMemory: Bool = false
     var isSaveToDisk: Bool = false
@@ -37,9 +50,9 @@ class JJSNetwork: JJSBaseNetwork {
         newObject = responseOperation(newObject: newObject, oldObject: oldCacheObject)
         
         if let object = newObject {
-            if !object.successForBussiness() {
-                return
-            }
+//            if !object.successForBussiness() {
+//                return
+//            }
         } else {
             return
         }
@@ -60,8 +73,62 @@ class JJSNetwork: JJSBaseNetwork {
     // MARK: -
     // MARK: response operation
     
+    open func getConvertObjectContent(_ resoponseDic: [String : Any]) -> [String : Any] {
+        return resoponseDic;
+    }
+    
     open func convertToObject(_ resoponseString: String?) -> JJSNetworkBaseObjectProtocol? {
-        return nil
+        
+        guard resoponseString != nil else {
+            return nil
+        }
+        
+        let json = JSON(parseJSON: resoponseString!)
+        let resoponseDic = json.dictionaryObject
+        let resoponseArray = json.array
+        
+        guard resoponseDic != nil else {
+            return nil
+        }
+        
+        let convertContentDic = getConvertObjectContent(resoponseDic!)
+        
+        var aa: T?
+        
+        let stringg = "[{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"},{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"}]"
+        let dd = JSONDeserializer<JJWeatherModel1>.deserializeModelArrayFrom(json: stringg)
+        if let tt = dd {
+            print(tt.count)
+        }
+        
+        let json1 = JSON(parseJSON: stringg)
+        let resoponseDic1 = json1.dictionaryObject
+        let resoponseArray1 = json1.array
+        let resoponseArray2 = json1.arrayValue
+        let resoponseArray3 = json1.arrayObject
+//        let ddd: [String : Any]? = resoponseArray3?[0] as? [String : Any]
+//        if let yyy = ddd {
+//            print("")
+//        }
+
+        
+        switch convertContentDic {
+        case let object as [String : Any] where object.count > 0:
+            aa = JSONDeserializer<T>.deserializeFrom(dict: convertContentDic as NSDictionary?)
+        case let object as [Any] where object.count > 0: break
+            //aa = JSONDeserializer<T>.deserializeModelArrayFrom(json: "") (dict: convertContentDic as NSDictionary?)
+        case let object as String:
+            aa = T.init()
+            aa?.responseResultString = resoponseString
+        default: break
+            aa = T.init()
+        }
+        
+        if let object = aa {
+            object.responseMessage()
+        }
+        
+        return aa
     }
     
     open func responseOperation(newObject: JJSNetworkBaseObjectProtocol?, oldObject: JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol? {

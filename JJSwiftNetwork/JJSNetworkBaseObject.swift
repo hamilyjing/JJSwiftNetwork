@@ -8,9 +8,9 @@
 
 import UIKit
 
-protocol JJSNetworkBaseObjectProtocol {
+public protocol JJSNetworkBaseObjectProtocol {
     
-    func successForBussiness()
+    func successForBussiness() -> Bool
     
     func responseMessage() -> String
     
@@ -20,11 +20,17 @@ protocol JJSNetworkBaseObjectProtocol {
 
 extension JJSNetworkBaseObjectProtocol {
     
-    func successForBussiness() -> Bool {
+    public func successForBussiness() -> Bool {
         return false
     }
     
-    func responseMessage() -> String {
+    public func responseMessage() -> String {
         return ""
     }
+}
+
+open class JJSNetworkBaseObject: JJSNetworkBaseObjectProtocol {
+    
+    public var responseResultArray: Array<Any>?
+    public var responseResultString: String?
 }

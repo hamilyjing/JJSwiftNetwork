@@ -11,3 +11,8 @@ target 'JJSwiftNetwork' do
     project 'JJSwiftNetwork.xcodeproj'
     shared_pods
 end
+
+target 'JJSwiftNetworkTests' do
+    project 'JJSwiftNetwork.xcodeproj'
+    shared_pods
+end
