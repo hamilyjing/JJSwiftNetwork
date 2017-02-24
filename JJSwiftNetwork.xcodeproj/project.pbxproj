@@ -11,6 +11,8 @@
 		289026C21E56D8E900932F3A /* JJSwiftNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */; };
 		289026C41E56D8E900932F3A /* JJSwiftNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 289026B61E56D8E900932F3A /* JJSwiftNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		289026CE1E56DFA900932F3A /* JJSBaseNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026CD1E56DFA900932F3A /* JJSBaseNetwork.swift */; };
+		28DF21C01E5FCE4900D8E11F /* JJSNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF21BF1E5FCE4900D8E11F /* JJSNetwork.swift */; };
+		28DF21C21E5FCE5700D8E11F /* JJSNetworkBaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */; };
 		BC04C2C9E80A2688D4413E2A /* Pods_JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JJSwiftNetworkTests.swift; sourceTree = "<group>"; };
 		289026C31E56D8E900932F3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		289026CD1E56DFA900932F3A /* JJSBaseNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSBaseNetwork.swift; sourceTree = "<group>"; };
+		28DF21BF1E5FCE4900D8E11F /* JJSNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetwork.swift; sourceTree = "<group>"; };
+		28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkBaseObject.swift; sourceTree = "<group>"; };
 		71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -89,9 +93,11 @@
 		289026B51E56D8E900932F3A /* JJSwiftNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				289026B61E56D8E900932F3A /* JJSwiftNetwork.h */,
 				289026B71E56D8E900932F3A /* Info.plist */,
 				289026CD1E56DFA900932F3A /* JJSBaseNetwork.swift */,
+				28DF21BF1E5FCE4900D8E11F /* JJSNetwork.swift */,
+				28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */,
+				289026B61E56D8E900932F3A /* JJSwiftNetwork.h */,
 			);
 			path = JJSwiftNetwork;
 			sourceTree = "<group>";
@@ -259,6 +265,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28DF21C01E5FCE4900D8E11F /* JJSNetwork.swift in Sources */,
+				28DF21C21E5FCE5700D8E11F /* JJSNetworkBaseObject.swift in Sources */,
 				289026CE1E56DFA900932F3A /* JJSBaseNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
