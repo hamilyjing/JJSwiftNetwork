@@ -11,13 +11,13 @@ import UIKit
 import HandyJSON
 import SwiftyJSON
 
-class JJWeatherModel1: JJSNetworkBaseObject, HandyJSON {
-    
-    var errNum: Int64?
-    var errMsg: String?
-    
-    required override init() {}
-}
+//class JJWeatherModel1: JJSNetworkBaseObject, HandyJSON {
+//    
+//    var errNum: Int64?
+//    var errMsg: String?
+//    
+//    required override init() {}
+//}
 
 class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     
@@ -49,11 +49,7 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         
         newObject = responseOperation(newObject: newObject, oldObject: oldCacheObject)
         
-        if let object = newObject {
-//            if !object.successForBussiness() {
-//                return
-//            }
-        } else {
+        if !successForBussiness(newObject) {
             return
         }
         
@@ -98,6 +94,7 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
             resultObject = JSONDeserializer<T>.deserializeFrom(dict: object as NSDictionary?)
         case let object as [Any] where object.count > 0:
             let json = JSON(object)
+            resultObject = T.init()
             resultObject?.responseResultArray = JSONDeserializer<T>.deserializeModelArrayFrom(json: json.string)
         case _ as String:
             resultObject = T.init()
@@ -145,7 +142,11 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         return newObject
     }
     
-    open func successForBussiness(_ objct: Any?) -> Bool {
+    open func successForBussiness(_ objct: JJSNetworkBaseObjectProtocol?) -> Bool {
+        
+        if let object = objct {
+            return object.successForBussiness()
+        }
         return false
     }
     
@@ -153,7 +154,7 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     // MARK: cache file config
     
     open func cacheFilePath() -> String {
-        return ""
+        return cacheFileDirectory() + cacheFileName()
     }
     
     open func cacheFileDirectory() -> String {

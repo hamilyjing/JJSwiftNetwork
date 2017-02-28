@@ -47,7 +47,8 @@ class JJSwiftNetworkTests: XCTestCase {
             print("123")
             let object = network.currentResponseObject()
             if let object1 = object as? JJWeatherModel1 {
-                let aa = object1.errNum
+                print(object1.errNum)
+                print(object1.errMsg ?? "1234")
             }
             expectation.fulfill()
         }
