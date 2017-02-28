@@ -10,12 +10,14 @@ import UIKit
 
 public protocol JJSNetworkBaseObjectProtocol {
     
+    var responseResultArray: Array<Any>? { get set }
+    var responseResultString: String? { get set }
+    
     func successForBussiness() -> Bool
     
     func responseMessage() -> String
     
-    var responseResultArray: Array<Any>? { get set }
-    var responseResultString: String? { get set }
+    func setData(_ content: [String: Any]) -> Void
 }
 
 extension JJSNetworkBaseObjectProtocol {
@@ -26,6 +28,10 @@ extension JJSNetworkBaseObjectProtocol {
     
     public func responseMessage() -> String {
         return ""
+    }
+    
+    public func setData(_ content: [String: Any]) -> Void {
+        
     }
 }
 

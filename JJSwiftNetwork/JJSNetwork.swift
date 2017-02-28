@@ -73,7 +73,7 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     // MARK: -
     // MARK: response operation
     
-    open func getConvertObjectContent(_ resoponseDic: [String : Any]) -> [String : Any] {
+    open func getConvertObjectContent(_ resoponseDic: [String : Any]) -> Any {
         return resoponseDic;
     }
     
@@ -85,50 +85,56 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         
         let json = JSON(parseJSON: resoponseString!)
         let resoponseDic = json.dictionaryObject
-        let resoponseArray = json.array
-        
         guard resoponseDic != nil else {
             return nil
         }
         
         let convertContentDic = getConvertObjectContent(resoponseDic!)
         
-        var aa: T?
+        var resultObject: T?
         
-        let stringg = "[{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"},{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"}]"
-        let dd = JSONDeserializer<JJWeatherModel1>.deserializeModelArrayFrom(json: stringg)
-        if let tt = dd {
-            print(tt.count)
+        switch convertContentDic {
+        case let object as [String : Any] where object.count > 0:
+            resultObject = JSONDeserializer<T>.deserializeFrom(dict: object as NSDictionary?)
+        case let object as [Any] where object.count > 0:
+            let json = JSON(object)
+            resultObject?.responseResultArray = JSONDeserializer<T>.deserializeModelArrayFrom(json: json.string)
+        case _ as String:
+            resultObject = T.init()
+            resultObject?.responseResultString = resoponseString
+        default:
+            resultObject = T.init()
         }
         
-        let json1 = JSON(parseJSON: stringg)
-        let resoponseDic1 = json1.dictionaryObject
-        let resoponseArray1 = json1.array
-        let resoponseArray2 = json1.arrayValue
-        let resoponseArray3 = json1.arrayObject
+//        let stringg = "[{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"},{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"}]"
+//        let dd = JSONDeserializer<JJWeatherModel1>.deserializeModelArrayFrom(json: stringg)
+//        if let tt = dd {
+//            print(tt.count)
+//        }
+//        
+//        let json1 = JSON(parseJSON: stringg)
+//        let resoponseDic1 = json1.dictionaryObject
+//        let resoponseArray1 = json1.array
+//        let resoponseArray2 = json1.arrayValue
+//        let resoponseArray3 = json1.arrayObject
 //        let ddd: [String : Any]? = resoponseArray3?[0] as? [String : Any]
 //        if let yyy = ddd {
 //            print("")
 //        }
 
         
-        switch convertContentDic {
-        case let object as [String : Any] where object.count > 0:
-            aa = JSONDeserializer<T>.deserializeFrom(dict: convertContentDic as NSDictionary?)
-        case let object as [Any] where object.count > 0: break
-            //aa = JSONDeserializer<T>.deserializeModelArrayFrom(json: "") (dict: convertContentDic as NSDictionary?)
-        case let object as String:
-            aa = T.init()
-            aa?.responseResultString = resoponseString
-        default: break
-            aa = T.init()
-        }
         
-        if let object = aa {
-            object.responseMessage()
-        }
         
-        return aa
+//        if let object = aa {
+//            object.responseMessage()
+//        }
+        
+        if let object = resultObject {
+            object.setData(resoponseDic!)
+            return object
+        } else {
+            return nil
+        }
     }
     
     open func responseOperation(newObject: JJSNetworkBaseObjectProtocol?, oldObject: JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol? {
@@ -136,7 +142,7 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
             return responseOperation(newObject, oldObject)
         }
         
-        return nil
+        return newObject
     }
     
     open func successForBussiness(_ objct: Any?) -> Bool {
@@ -163,6 +169,13 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     
     open func cacheObject() -> JJSNetworkBaseObjectProtocol? {
         return nil
+    }
+    
+    open func currentResponseObject() -> JJSNetworkBaseObjectProtocol? {
+        
+        var object = convertToObject(filterResponseString())
+        object = responseOperation(newObject: object, oldObject: oldCacheObject)
+        return object
     }
     
     open func saveObjectToMemory(_ object: Any) {

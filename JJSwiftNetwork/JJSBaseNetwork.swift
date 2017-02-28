@@ -11,6 +11,7 @@ import UIKit
 import Alamofire
 
 public class JJSBaseNetwork {
+    
     var successCompletionBlock: ((JJSBaseNetwork) -> Void)?
     var failureCompletionBlock: ((JJSBaseNetwork) -> Void)?
 
@@ -38,6 +39,14 @@ public class JJSBaseNetwork {
         request.responseString { response in
             requestComplete(response.response, response.result)
         }
+    }
+    
+    func start(successCompletionBlock: ((JJSBaseNetwork) -> Void)?, failureCompletionBlock: ((JJSBaseNetwork) -> Void)?) {
+        
+        self.successCompletionBlock = successCompletionBlock
+        self.failureCompletionBlock = failureCompletionBlock
+        
+        start()
     }
     
     open func stop() {

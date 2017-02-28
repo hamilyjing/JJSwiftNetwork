@@ -45,8 +45,9 @@ class JJSwiftNetworkTests: XCTestCase {
         network.isSaveToDisk = true
         network.successCompletionBlock = { baseNetwork in
             print("123")
-            if let weather = JSONDeserializer<JJWeatherModel>.deserializeFrom(json: baseNetwork.filterResponseString()) {
-                print("------------- " + weather.toJSONString()!)
+            let object = network.currentResponseObject()
+            if let object1 = object as? JJWeatherModel1 {
+                let aa = object1.errNum
             }
             expectation.fulfill()
         }
