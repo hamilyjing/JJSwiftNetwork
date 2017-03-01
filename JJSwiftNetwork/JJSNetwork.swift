@@ -10,6 +10,7 @@ import UIKit
 
 import HandyJSON
 import SwiftyJSON
+import JJSwiftTool
 
 //class JJWeatherModel1: JJSNetworkBaseObject, HandyJSON {
 //    
@@ -21,24 +22,28 @@ import SwiftyJSON
 
 class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     
-    var objectClass: JJSNetworkBaseObjectProtocol?
-    
     var isSaveToMemory: Bool = false
     var isSaveToDisk: Bool = false
     
     private var oldCacheObject: JJSNetworkBaseObjectProtocol?
     private var newCacheObject: JJSNetworkBaseObjectProtocol?
     
+    var userCacheDirectory: String?
+    var sensitiveDataForSavedFileName: String?
+    var parametersForSavedFileName: [String: Any]?
+    var identity: String?
+    
     var operation: ((JJSNetworkBaseObjectProtocol?, JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol?)?
     
     override init() {
-        
     }
     
     // MARK: -
     // MARK: overwrite
     
     override func requestCompleteFilter() {
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JJSwiftNetworkResponseSuccess"), object: responseString)
         
         if !isSaveToMemory && !isSaveToDisk {
             return
@@ -60,10 +65,17 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         if isSaveToDisk {
             saveObjectToDisk(newObject!)
         }
+        
+        super.requestCompleteFilter()
     }
     
     override func requestFailedFilter() {
         
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JJSwiftNetworkResponseFail"), object: responseString)
+        
+        super.requestFailedFilter()
+        
+        processAbnormalStatus()
     }
     
     // MARK: -
@@ -144,32 +156,78 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     
     open func successForBussiness(_ objct: JJSNetworkBaseObjectProtocol?) -> Bool {
         
-        if let object = objct {
-            return object.successForBussiness()
+        if let tempObject = objct {
+            return tempObject.successForBussiness()
         }
         return false
+    }
+    
+    open func processAbnormalStatus() {
     }
     
     // MARK: -
     // MARK: cache file config
     
     open func cacheFilePath() -> String {
-        return cacheFileDirectory() + cacheFileName()
+        return cacheFileDirectory() + "/" + cacheFileName()
     }
     
     open func cacheFileDirectory() -> String {
-        return ""
+        
+        var cachesDirectory = FileManager.jjs_cachesDirectory()
+        cachesDirectory += "/JJSwiftNetwork"
+        
+        if let userCacheDirectory = self.userCacheDirectory {
+            cachesDirectory += "/" + userCacheDirectory
+        }
+        
+        let flag = FileManager.jjs_createDirectoryAtPath(path: cachesDirectory)
+        assert(flag)
+        
+        return cachesDirectory
     }
     
     open func cacheFileName() -> String {
-        return ""
+        
+        var cacheFileName: String = ""
+        
+        if let sensitiveData = sensitiveDataForSavedFileName {
+            cacheFileName += sensitiveData + "_"
+        } else {
+            cacheFileName += "AllAccount" + "_"
+        }
+        
+        if let identity = identity {
+            cacheFileName += identity + "_"
+        }
+        
+        let parameters = self.parametersForSavedFileName ?? [String: Any]()
+        let parametersString = "Parameters:\(parameters)"
+        let parametersStringMd5 = parametersString.jjs_md5String()
+        cacheFileName += parametersStringMd5
+        
+        return cacheFileName
     }
     
     // MARK: -
     // MARK: cache operation
     
     open func cacheObject() -> JJSNetworkBaseObjectProtocol? {
-        return nil
+        
+        if newCacheObject != nil {
+            return newCacheObject
+        }
+        
+        let filePath = cacheFilePath()
+        let data = FileManager.default.contents(atPath: filePath)
+        if nil == data {
+            return nil
+        }
+        
+        let savedString = data!.jjs_string()
+        let object = JSONDeserializer<T>.deserializeFrom(json: savedString)
+        
+        return object
     }
     
     open func currentResponseObject() -> JJSNetworkBaseObjectProtocol? {
@@ -179,22 +237,57 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         return object
     }
     
-    open func saveObjectToMemory(_ object: Any) {
+    open func saveObjectToMemory(_ object: JJSNetworkBaseObjectProtocol?) {
+        newCacheObject = object
     }
     
-    open func saveObjectToDisk(_ object: Any) {
+    open func saveObjectToDisk(_ object: JJSNetworkBaseObjectProtocol?) {
+        
+        guard object != nil else {
+            return
+        }
+        
+        let filePath = cacheFilePath()
+        let savedString = object!.stringForSave()
+        guard savedString != nil else {
+            return
+        }
+        
+        do
+        {
+            try savedString!.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+        }
+        catch let error as NSError
+        {
+            assert(false, "error\(error.localizedDescription)")
+        }
     }
     
     open func haveDiskCache() -> Bool {
-        return false
+        return FileManager.jjs_isFileExistAtPath(fileFullPath: cacheFilePath())
     }
     
-    open func removeMemoryCache(_ object: Any) {
+    open func removeMemoryCache() {
+        
+        newCacheObject = nil
+        oldCacheObject = nil
     }
 
-    open func removeDiskCache(_ object: Any) {
+    open func removeDiskCache() {
+        
+        do
+        {
+            try FileManager.default.removeItem(atPath: cacheFilePath())
+        }
+        catch let error as NSError
+        {
+            assert(false, "error\(error.localizedDescription)")
+        }
     }
 
     open func removeAllCache(_ object: Any) {
+        
+        removeMemoryCache()
+        removeDiskCache()
     }
 }

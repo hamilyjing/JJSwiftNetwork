@@ -23,8 +23,14 @@ public class JJSBaseNetwork {
     lazy var httpMethod: HTTPMethod = .get
     
     var response: HTTPURLResponse?
-    var responseStatusCode: Int { return (self.response?.statusCode)! }
-    private var responseString: String?
+    var responseStatusCode: Int {
+        if let response = response {
+            return response.statusCode
+        } else {
+            return 0
+        }
+    }
+    var responseString: String?
     var responseError: Error?
     
     var responseHeaders: [String: String] = [:]

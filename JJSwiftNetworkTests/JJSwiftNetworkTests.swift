@@ -12,12 +12,22 @@ import HandyJSON
 
 @testable import JJSwiftNetwork
 
-class JJWeatherModel: HandyJSON {
+class JJWeatherModel: JJSNetworkBaseObject, HandyJSON {
     
     var errNum: Int64?
     var errMsg: String?
     
-    required init() {}
+    public override required init() {
+        super.init()
+    }
+    
+    open override func successForBussiness() -> Bool {
+        return true
+    }
+    
+    open override func stringForSave() -> String? {
+        return self.toJSONString()
+    }
 }
 
 class JJSwiftNetworkTests: XCTestCase {
@@ -40,14 +50,14 @@ class JJSwiftNetworkTests: XCTestCase {
         
         let expectation = self.expectation(description: "myExpectation")
         
-        let network = JJSNetwork<JJWeatherModel1>()
+        let network = JJSNetwork<JJWeatherModel>()
         network.hostURL = "https://apis.baidu.com/showapi_open_bus/weather_showapi/areaid"
         network.isSaveToDisk = true
         network.successCompletionBlock = { baseNetwork in
             print("123")
             let object = network.currentResponseObject()
-            if let object1 = object as? JJWeatherModel1 {
-                print(object1.errNum)
+            if let object1 = object as? JJWeatherModel {
+                print(object1.errNum ?? Int64(0))
                 print(object1.errMsg ?? "1234")
             }
             expectation.fulfill()

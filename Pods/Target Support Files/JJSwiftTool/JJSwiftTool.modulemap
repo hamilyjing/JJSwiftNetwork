@@ -1,0 +1,6 @@
+framework module JJSwiftTool {
+  umbrella header "JJSwiftTool-umbrella.h"
+
+  export *
+  module * { export * }
+}

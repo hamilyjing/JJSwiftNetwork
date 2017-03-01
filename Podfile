@@ -5,6 +5,7 @@ def shared_pods
     pod 'Alamofire', '~> 4.3.0'
     pod 'SwiftyJSON', '~> 3.1.4'
     pod 'HandyJSON', '~> 1.5.2'
+    pod 'JJSwiftTool'
 end
 
 target 'JJSwiftNetwork' do

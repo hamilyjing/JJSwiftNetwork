@@ -18,25 +18,27 @@ public protocol JJSNetworkBaseObjectProtocol {
     func responseMessage() -> String
     
     func setData(_ content: [String: Any]) -> Void
-}
-
-extension JJSNetworkBaseObjectProtocol {
     
-    public func successForBussiness() -> Bool {
-        return false
-    }
-    
-    public func responseMessage() -> String {
-        return ""
-    }
-    
-    public func setData(_ content: [String: Any]) -> Void {
-        
-    }
+    func stringForSave() -> String?
 }
 
 open class JJSNetworkBaseObject: JJSNetworkBaseObjectProtocol {
     
     public var responseResultArray: Array<Any>?
     public var responseResultString: String?
+    
+    open func successForBussiness() -> Bool {
+        return false
+    }
+    
+    open func responseMessage() -> String {
+        return ""
+    }
+    
+    open func setData(_ content: [String: Any]) -> Void {
+    }
+    
+    open func stringForSave() -> String? {
+        return nil
+    }
 }
