@@ -12,21 +12,13 @@ import HandyJSON
 
 @testable import JJSwiftNetwork
 
-class JJWeatherModel: JJSNetworkBaseObject, HandyJSON {
+class JJWeatherModel: JJSNetworkBaseObject {
     
     var errNum: Int64?
     var errMsg: String?
     
-    public override required init() {
-        super.init()
-    }
-    
     open override func successForBussiness() -> Bool {
         return true
-    }
-    
-    open override func stringForSave() -> String? {
-        return self.toJSONString()
     }
 }
 

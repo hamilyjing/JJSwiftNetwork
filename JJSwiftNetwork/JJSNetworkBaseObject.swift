@@ -8,6 +8,8 @@
 
 import UIKit
 
+import HandyJSON
+
 public protocol JJSNetworkBaseObjectProtocol {
     
     var responseResultArray: Array<Any>? { get set }
@@ -19,10 +21,10 @@ public protocol JJSNetworkBaseObjectProtocol {
     
     func setData(_ content: [String: Any]) -> Void
     
-    func stringForSave() -> String?
+    func encodeString() -> String?
 }
 
-open class JJSNetworkBaseObject: JJSNetworkBaseObjectProtocol {
+open class JJSNetworkBaseObject: JJSNetworkBaseObjectProtocol, HandyJSON {
     
     public var responseResultArray: Array<Any>?
     public var responseResultString: String?
@@ -38,7 +40,10 @@ open class JJSNetworkBaseObject: JJSNetworkBaseObjectProtocol {
     open func setData(_ content: [String: Any]) -> Void {
     }
     
-    open func stringForSave() -> String? {
-        return nil
+    open func encodeString() -> String? {
+        return self.toJSONString()
+    }
+    
+    public required init() {
     }
 }

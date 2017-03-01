@@ -248,7 +248,7 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         }
         
         let filePath = cacheFilePath()
-        let savedString = object!.stringForSave()
+        let savedString = object!.encodeString()
         guard savedString != nil else {
             return
         }
