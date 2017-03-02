@@ -10,9 +10,9 @@ import UIKit
 
 import HandyJSON
 
-public protocol JJSNetworkBaseObjectProtocol {
+public protocol JJSNetworkBaseObjectProtocol: HandyJSON {
     
-    var responseResultArray: Array<Any>? { get set }
+    var responseResultArray: [Any]? { get set }
     var responseResultString: String? { get set }
     
     func successForBussiness() -> Bool
@@ -24,7 +24,7 @@ public protocol JJSNetworkBaseObjectProtocol {
     func encodeString() -> String?
 }
 
-open class JJSNetworkBaseObject: JJSNetworkBaseObjectProtocol, HandyJSON {
+open class JJSNetworkBaseObject: JJSNetworkBaseObjectProtocol {
     
     public var responseResultArray: Array<Any>?
     public var responseResultString: String?

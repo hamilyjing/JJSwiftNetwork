@@ -43,10 +43,10 @@ class JJSwiftNetworkTests: XCTestCase {
         let expectation = self.expectation(description: "myExpectation")
         
         let network = JJSNetwork<JJWeatherModel>()
-        network.hostURL = "https://apis.baidu.com/showapi_open_bus/weather_showapi/areaid"
+        //network.hostURL = "https://apis.baidu.com/showapi_open_bus/weather_showapi/areaid"
         network.isSaveToDisk = true
         network.successCompletionBlock = { baseNetwork in
-            print("123")
+            print("success")
             let object = network.currentResponseObject()
             if let object1 = object as? JJWeatherModel {
                 print(object1.errNum ?? Int64(0))
@@ -55,7 +55,7 @@ class JJSwiftNetworkTests: XCTestCase {
             expectation.fulfill()
         }
         network.failureCompletionBlock = { baseNetwork in
-            print("789")
+            print("fail")
             expectation.fulfill()
         }
         network.start()

@@ -12,15 +12,7 @@ import HandyJSON
 import SwiftyJSON
 import JJSwiftTool
 
-//class JJWeatherModel1: JJSNetworkBaseObject, HandyJSON {
-//    
-//    var errNum: Int64?
-//    var errMsg: String?
-//    
-//    required override init() {}
-//}
-
-class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
+open class JJSNetwork<T: JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     
     var isSaveToMemory: Bool = false
     var isSaveToDisk: Bool = false
@@ -35,15 +27,27 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     
     var operation: ((JJSNetworkBaseObjectProtocol?, JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol?)?
     
+    // MARK: -
+    // MARK: lifecycle
+    
     override init() {
+    }
+    
+    required public init(parameters: [String: Any]?, identity: String?, isSaveToMemory: Bool, isSaveToDisk: Bool) {
+        super.init()
+        
+        self.httpParameters = parameters
+        self.identity = identity
+        self.isSaveToMemory = isSaveToMemory
+        self.isSaveToDisk = isSaveToDisk
+        self.parametersForSavedFileName = self.httpParameters
     }
     
     // MARK: -
     // MARK: overwrite
     
-    override func requestCompleteFilter() {
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JJSwiftNetworkResponseSuccess"), object: responseString)
+    override open func requestCompleteFilter() {
+        super.requestCompleteFilter()
         
         if !isSaveToMemory && !isSaveToDisk {
             return
@@ -51,7 +55,6 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         
         oldCacheObject = cacheObject()
         var newObject = convertToObject(filterResponseString())
-        
         newObject = responseOperation(newObject: newObject, oldObject: oldCacheObject)
         
         if !successForBussiness(newObject) {
@@ -63,16 +66,11 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         }
         
         if isSaveToDisk {
-            saveObjectToDisk(newObject!)
+            saveObjectToDisk(newObject)
         }
-        
-        super.requestCompleteFilter()
     }
     
-    override func requestFailedFilter() {
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JJSwiftNetworkResponseFail"), object: responseString)
-        
+    override open func requestFailedFilter() {
         super.requestFailedFilter()
         
         processAbnormalStatus()
@@ -81,62 +79,52 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     // MARK: -
     // MARK: response operation
     
+    open func filterResponseString() -> String? {
+        return responseString
+    }
+    
     open func getConvertObjectContent(_ resoponseDic: [String : Any]) -> Any {
         return resoponseDic;
     }
     
     open func convertToObject(_ resoponseString: String?) -> JJSNetworkBaseObjectProtocol? {
-        
         guard resoponseString != nil else {
             return nil
         }
         
         let json = JSON(parseJSON: resoponseString!)
         let resoponseDic = json.dictionaryObject
-        guard resoponseDic != nil else {
+        if nil == resoponseDic {
             return nil
         }
         
-        let convertContentDic = getConvertObjectContent(resoponseDic!)
+        let convertObject = getConvertObjectContent(resoponseDic!)
         
         var resultObject: T?
         
-        switch convertContentDic {
+        switch convertObject {
         case let object as [String : Any] where object.count > 0:
             resultObject = JSONDeserializer<T>.deserializeFrom(dict: object as NSDictionary?)
         case let object as [Any] where object.count > 0:
             let json = JSON(object)
+            let jsonString = json.rawString()
+            let objectArray = JSONDeserializer<T>.deserializeModelArrayFrom(json: jsonString)
+            var resultArray = [T]()
+            if let tempObjectArray = objectArray {
+                for item in tempObjectArray {
+                    if let tempItem = item {
+                        resultArray.append(tempItem)
+                    }
+                }
+            }
             resultObject = T.init()
-            resultObject?.responseResultArray = JSONDeserializer<T>.deserializeModelArrayFrom(json: json.string)
-        case _ as String:
+            resultObject?.responseResultArray = resultArray
+        case let object as String:
             resultObject = T.init()
-            resultObject?.responseResultString = resoponseString
+            resultObject?.responseResultString = object
         default:
             resultObject = T.init()
         }
-        
-//        let stringg = "[{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"},{\"errNum\": 300202,\"errMsg\": \"Missingapikey\"}]"
-//        let dd = JSONDeserializer<JJWeatherModel1>.deserializeModelArrayFrom(json: stringg)
-//        if let tt = dd {
-//            print(tt.count)
-//        }
-//        
-//        let json1 = JSON(parseJSON: stringg)
-//        let resoponseDic1 = json1.dictionaryObject
-//        let resoponseArray1 = json1.array
-//        let resoponseArray2 = json1.arrayValue
-//        let resoponseArray3 = json1.arrayObject
-//        let ddd: [String : Any]? = resoponseArray3?[0] as? [String : Any]
-//        if let yyy = ddd {
-//            print("")
-//        }
-
-        
-        
-        
-//        if let object = aa {
-//            object.responseMessage()
-//        }
         
         if let object = resultObject {
             object.setData(resoponseDic!)
@@ -155,7 +143,6 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     }
     
     open func successForBussiness(_ objct: JJSNetworkBaseObjectProtocol?) -> Bool {
-        
         if let tempObject = objct {
             return tempObject.successForBussiness()
         }
@@ -173,7 +160,6 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     }
     
     open func cacheFileDirectory() -> String {
-        
         var cachesDirectory = FileManager.jjs_cachesDirectory()
         cachesDirectory += "/JJSwiftNetwork"
         
@@ -188,7 +174,6 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     }
     
     open func cacheFileName() -> String {
-        
         var cacheFileName: String = ""
         
         if let sensitiveData = sensitiveDataForSavedFileName {
@@ -213,7 +198,6 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     // MARK: cache operation
     
     open func cacheObject() -> JJSNetworkBaseObjectProtocol? {
-        
         if newCacheObject != nil {
             return newCacheObject
         }
@@ -227,11 +211,14 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         let savedString = data!.jjs_string()
         let object = JSONDeserializer<T>.deserializeFrom(json: savedString)
         
+        if isSaveToMemory {
+            newCacheObject = object
+        }
+        
         return object
     }
     
     open func currentResponseObject() -> JJSNetworkBaseObjectProtocol? {
-        
         var object = convertToObject(filterResponseString())
         object = responseOperation(newObject: object, oldObject: oldCacheObject)
         return object
@@ -242,20 +229,19 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     }
     
     open func saveObjectToDisk(_ object: JJSNetworkBaseObjectProtocol?) {
-        
         guard object != nil else {
             return
         }
         
         let filePath = cacheFilePath()
-        let savedString = object!.encodeString()
-        guard savedString != nil else {
+        let encodeString = object!.encodeString()
+        guard encodeString != nil else {
             return
         }
         
         do
         {
-            try savedString!.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+            try encodeString!.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
         }
         catch let error as NSError
         {
@@ -268,25 +254,19 @@ class JJSNetwork<T: HandyJSON & JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     }
     
     open func removeMemoryCache() {
-        
         newCacheObject = nil
         oldCacheObject = nil
     }
 
     open func removeDiskCache() {
-        
-        do
-        {
+        do{
             try FileManager.default.removeItem(atPath: cacheFilePath())
-        }
-        catch let error as NSError
-        {
+        } catch let error as NSError {
             assert(false, "error\(error.localizedDescription)")
         }
     }
 
     open func removeAllCache(_ object: Any) {
-        
         removeMemoryCache()
         removeDiskCache()
     }

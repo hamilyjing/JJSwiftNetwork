@@ -10,45 +10,69 @@ import UIKit
 
 import Alamofire
 
-public class JJSBaseNetwork {
+open class JJSBaseNetwork {
     
     var successCompletionBlock: ((JJSBaseNetwork) -> Void)?
     var failureCompletionBlock: ((JJSBaseNetwork) -> Void)?
-
-    var hostURL: String! = ""
-    var pathURL: String! = ""
-    var parameters: [String: Any]?
-    var httpHeaders: [String: String]?
     
-    lazy var httpMethod: HTTPMethod = .get
+    var httpRequest: Request?
+    var httpParameters: [String: Any]?
+    var httpMethod: HTTPMethod = .get
     
     var response: HTTPURLResponse?
-    var responseStatusCode: Int {
+    var responseString: String?
+    var responseError: Error?
+    var responseStatusCode: Int? {
         if let response = response {
             return response.statusCode
         } else {
-            return 0
+            return nil
         }
     }
-    var responseString: String?
-    var responseError: Error?
+    var responseHeaders: [String: String]? {
+        if let response = response {
+            var headers = [String: String]()
+            for (field, value) in response.allHeaderFields {
+                headers["\(field)"] = "\(value)"
+            }
+            return headers
+        } else {
+            return nil
+        }
+    }
     
-    var responseHeaders: [String: String] = [:]
+    open func requestHostURL() -> String {
+        return ""
+    }
+    
+    open func requestPathURL() -> String {
+        return ""
+    }
+    
+    open func requestParameters() -> [String: Any]? {
+        return httpParameters
+    }
+    
+    open func requestHeaders() -> [String: String]? {
+        return nil
+    }
     
     open func start() {
-        let request = Alamofire.request(buildRequestURL(), method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeaders)
+        stop()
         
         let requestComplete: (HTTPURLResponse?, Result<String>) -> Void = { response, result in
             self.handleRequestResult(response, result)
         }
         
+        let request = Alamofire.request(buildRequestURL(), method: httpMethod, parameters: requestParameters(), encoding: URLEncoding.default, headers: requestHeaders())
         request.responseString { response in
             requestComplete(response.response, response.result)
         }
+        
+        self.httpRequest = request
     }
     
     func start(successCompletionBlock: ((JJSBaseNetwork) -> Void)?, failureCompletionBlock: ((JJSBaseNetwork) -> Void)?) {
-        
         self.successCompletionBlock = successCompletionBlock
         self.failureCompletionBlock = failureCompletionBlock
         
@@ -56,36 +80,26 @@ public class JJSBaseNetwork {
     }
     
     open func stop() {
-        
+        self.httpRequest?.cancel()
     }
     
     open func requestCompleteFilter() {
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JJSwiftNetworkResponseSuccess"), object: responseString)
     }
     
     open func requestFailedFilter() {
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JJSwiftNetworkResponseFail"), object: responseString)
     }
     
-    open func filterResponseString() -> String? {
-        return self.responseString
-    }
-    
-    func buildRequestURL() -> String {
-        return hostURL
+    open func buildRequestURL() -> String {
+        let urlString = requestHostURL() + requestPathURL()
+        return urlString
     }
     
     func handleRequestResult(_ response: HTTPURLResponse?, _ result: Result<String>) {
-        
+        self.response = response
         self.responseString = result.value
         self.responseError = result.error
-        
-        self.response = response
-        if let response = self.response {
-            for (field, value) in response.allHeaderFields {
-                self.responseHeaders["\(field)"] = "\(value)"
-            }
-        }
         
         let succeed = checkResult()
         if succeed {
@@ -105,16 +119,15 @@ public class JJSBaseNetwork {
     
     func checkResult() -> Bool {
         let result = statusCodeValidator()
-        if !result {
-            return result
-        }
-        
         return result
-        // jsonValidator
     }
     
     func statusCodeValidator() -> Bool {
-        let statusCode = self.responseStatusCode
+        guard responseStatusCode != nil else {
+            return false
+        }
+        
+        let statusCode = self.responseStatusCode!
         if statusCode >= 200 && statusCode <= 299 {
             return true
         } else {
