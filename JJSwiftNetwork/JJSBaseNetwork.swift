@@ -57,12 +57,18 @@ open class JJSBaseNetwork {
         return nil
     }
     
+    open func requestTimeoutInterval() -> TimeInterval {
+        return 60
+    }
+    
     open func start() {
         stop()
         
         let requestComplete: (HTTPURLResponse?, Result<String>) -> Void = { response, result in
             self.handleRequestResult(response, result)
         }
+        
+        SessionManager.default.session.configuration.timeoutIntervalForRequest = requestTimeoutInterval()
         
         let request = Alamofire.request(buildRequestURL(), method: httpMethod, parameters: requestParameters(), encoding: URLEncoding.default, headers: requestHeaders())
         request.responseString { response in
