@@ -1,5 +1,5 @@
 //
-//  JJSNetworkConvertObject.swift
+//  JJSNetworkJsonConvert.swift
 //  JJSwiftNetwork
 //
 //  Created by JJ on 3/3/17.
@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import HandyJSON
 
-public protocol JJSNetworkConvertObjectProtocol {
+public protocol JJSNetworkJsonConvertProtocol {
     
     func getConvertObjectContent(_ resoponseDic: [String : Any]) -> Any
     func convertToObject(jsonString: String?) -> JJSNetworkBaseObjectProtocol?
@@ -19,7 +19,7 @@ public protocol JJSNetworkConvertObjectProtocol {
     func deserializeFrom(jsonString: String?) -> JJSNetworkBaseObjectProtocol?
 }
 
-public class JJSNetworkConvertObject<T: JJSNetworkBaseObjectProtocol>: JJSNetworkConvertObjectProtocol {
+public class JJSNetworkJsonConvert<T: JJSNetworkBaseObjectProtocol>: JJSNetworkJsonConvertProtocol {
     
     public func getConvertObjectContent(_ resoponseDic: [String : Any]) -> Any {
         return resoponseDic;

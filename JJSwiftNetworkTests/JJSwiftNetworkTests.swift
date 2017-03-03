@@ -42,7 +42,7 @@ class JJSwiftNetworkTests: XCTestCase {
         
         let expectation = self.expectation(description: "myExpectation")
         
-        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather", isSaveToMemory: false, isSaveToDisk: true, convertObject: JJSNetworkConvertObject<JJWeatherModel>())
+        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather", isSaveToMemory: false, isSaveToDisk: true, jsonConvert: JJSNetworkJsonConvert<JJWeatherModel>())
         weatherNetwork.successCompletionBlock = { baseNetwork in
             print("success")
             let object = weatherNetwork.currentResponseObject()

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		152A746892025807E807DCC3 /* Pods_JJSwiftNetworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE62BB6966FF4CEAF1AC1B2A /* Pods_JJSwiftNetworkTests.framework */; };
 		286DD0CA1E67F0CA001F8C6A /* JJSWeatherNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DD0C91E67F0CA001F8C6A /* JJSWeatherNetwork.swift */; };
-		286DD0CD1E690D6E001F8C6A /* JJSNetworkConvertObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DD0CC1E690D6E001F8C6A /* JJSNetworkConvertObject.swift */; };
+		286DD0CD1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DD0CC1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift */; };
 		289026BD1E56D8E900932F3A /* JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */; };
 		289026C21E56D8E900932F3A /* JJSwiftNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */; };
 		289026C41E56D8E900932F3A /* JJSwiftNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 289026B61E56D8E900932F3A /* JJSwiftNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,7 +34,7 @@
 		1E6BADC4ABBE97AD36086F99 /* Pods-JJSwiftNetworkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetworkTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetworkTests/Pods-JJSwiftNetworkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		24769B8C14F3FA2A2A4D7AA4 /* Pods-JJSwiftNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetwork/Pods-JJSwiftNetwork.release.xcconfig"; sourceTree = "<group>"; };
 		286DD0C91E67F0CA001F8C6A /* JJSWeatherNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSWeatherNetwork.swift; sourceTree = "<group>"; };
-		286DD0CC1E690D6E001F8C6A /* JJSNetworkConvertObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkConvertObject.swift; sourceTree = "<group>"; };
+		286DD0CC1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkJsonConvert.swift; sourceTree = "<group>"; };
 		289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289026B61E56D8E900932F3A /* JJSwiftNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJSwiftNetwork.h; sourceTree = "<group>"; };
 		289026B71E56D8E900932F3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 				289026CD1E56DFA900932F3A /* JJSBaseNetwork.swift */,
 				28DF21BF1E5FCE4900D8E11F /* JJSNetwork.swift */,
 				28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */,
-				286DD0CC1E690D6E001F8C6A /* JJSNetworkConvertObject.swift */,
+				286DD0CC1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift */,
 				289026B61E56D8E900932F3A /* JJSwiftNetwork.h */,
 			);
 			path = JJSwiftNetwork;
@@ -328,7 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28DF21C01E5FCE4900D8E11F /* JJSNetwork.swift in Sources */,
-				286DD0CD1E690D6E001F8C6A /* JJSNetworkConvertObject.swift in Sources */,
+				286DD0CD1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift in Sources */,
 				28DF21C21E5FCE5700D8E11F /* JJSNetworkBaseObject.swift in Sources */,
 				289026CE1E56DFA900932F3A /* JJSBaseNetwork.swift in Sources */,
 			);

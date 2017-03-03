@@ -27,7 +27,7 @@ open class JJSNetwork: JJSBaseNetwork {
     
     var operation: ((JJSNetworkBaseObjectProtocol?, JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol?)?
     
-    var convertObject: JJSNetworkConvertObjectProtocol?
+    var jsonConvert: JJSNetworkJsonConvertProtocol?
     
     // MARK: -
     // MARK: lifecycle
@@ -35,7 +35,7 @@ open class JJSNetwork: JJSBaseNetwork {
     override init() {
     }
     
-    required public init(parameters: [String: Any]?, identity: String?, isSaveToMemory: Bool, isSaveToDisk: Bool, convertObject: JJSNetworkConvertObjectProtocol?) {
+    required public init(parameters: [String: Any]?, identity: String?, isSaveToMemory: Bool, isSaveToDisk: Bool, jsonConvert: JJSNetworkJsonConvertProtocol?) {
         super.init()
         
         self.httpParameters = parameters
@@ -43,7 +43,7 @@ open class JJSNetwork: JJSBaseNetwork {
         self.isSaveToMemory = isSaveToMemory
         self.isSaveToDisk = isSaveToDisk
         self.parametersForSavedFileName = self.httpParameters
-        self.convertObject = convertObject
+        self.jsonConvert = jsonConvert
     }
     
     // MARK: -
@@ -91,7 +91,7 @@ open class JJSNetwork: JJSBaseNetwork {
     }
     
     open func convertToObject(_ resoponseString: String?) -> JJSNetworkBaseObjectProtocol? {
-        return self.convertObject?.convertToObject(jsonString: resoponseString)
+        return self.jsonConvert?.convertToObject(jsonString: resoponseString)
     }
     
     open func responseOperation(newObject: JJSNetworkBaseObjectProtocol?, oldObject: JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol? {
@@ -169,7 +169,7 @@ open class JJSNetwork: JJSBaseNetwork {
         }
         
         let savedString = data!.jjs_string()
-        let object = self.convertObject?.deserializeFrom(jsonString: savedString)
+        let object = self.jsonConvert?.deserializeFrom(jsonString: savedString)
         
         if isSaveToMemory {
             newCacheObject = object
