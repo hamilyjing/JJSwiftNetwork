@@ -2,7 +2,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 def shared_pods
-    pod 'CryptoSwift'
+    pod 'CryptoSwift', '~> 0.6.7'
     pod 'Alamofire', '~> 4.3.0'
     pod 'SwiftyJSON', '~> 3.1.4'
     pod 'HandyJSON', '~> 1.5.2'
