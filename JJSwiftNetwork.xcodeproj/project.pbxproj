@@ -19,7 +19,7 @@
 		28DF21C01E5FCE4900D8E11F /* JJSNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF21BF1E5FCE4900D8E11F /* JJSNetworkRequest.swift */; };
 		28DF21C21E5FCE5700D8E11F /* JJSNetworkBaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */; };
 		28F680781E69559400852261 /* JJSWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F680771E69559400852261 /* JJSWeatherModel.swift */; };
-		28F6807A1E695E8900852261 /* JJSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F680791E695E8900852261 /* JJSResult.swift */; };
+		28F6807C1E6969B000852261 /* JJSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F6807B1E6969B000852261 /* JJSResult.swift */; };
 		BC04C2C9E80A2688D4413E2A /* Pods_JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +51,7 @@
 		28DF21BF1E5FCE4900D8E11F /* JJSNetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkRequest.swift; sourceTree = "<group>"; };
 		28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkBaseObject.swift; sourceTree = "<group>"; };
 		28F680771E69559400852261 /* JJSWeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSWeatherModel.swift; sourceTree = "<group>"; };
-		28F680791E695E8900852261 /* JJSResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSResult.swift; sourceTree = "<group>"; };
+		28F6807B1E6969B000852261 /* JJSResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSResult.swift; sourceTree = "<group>"; };
 		71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9445FC887F4C649A488CBCF /* Pods-JJSwiftNetworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetworkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetworkTests/Pods-JJSwiftNetworkTests.release.xcconfig"; sourceTree = "<group>"; };
 		DE62BB6966FF4CEAF1AC1B2A /* Pods_JJSwiftNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				286DD0CF1E693B19001F8C6A /* JJSService.swift */,
-				28F680791E695E8900852261 /* JJSResult.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -122,6 +121,7 @@
 		289026B51E56D8E900932F3A /* JJSwiftNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				28F6807B1E6969B000852261 /* JJSResult.swift */,
 				289026B71E56D8E900932F3A /* Info.plist */,
 				289026CD1E56DFA900932F3A /* JJSBaseNetworkRequest.swift */,
 				28DF21BF1E5FCE4900D8E11F /* JJSNetworkRequest.swift */,
@@ -351,7 +351,7 @@
 				286DD0CD1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift in Sources */,
 				28DF21C21E5FCE5700D8E11F /* JJSNetworkBaseObject.swift in Sources */,
 				286DD0D01E693B19001F8C6A /* JJSService.swift in Sources */,
-				28F6807A1E695E8900852261 /* JJSResult.swift in Sources */,
+				28F6807C1E6969B000852261 /* JJSResult.swift in Sources */,
 				289026CE1E56DFA900932F3A /* JJSBaseNetworkRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
