@@ -12,6 +12,7 @@ import HandyJSON
 import SwiftyJSON
 import JJSwiftTool
 import Alamofire
+import CryptoSwift
 
 open class JJSNetworkRequest: JJSBaseNetworkRequest {
     
@@ -155,7 +156,7 @@ open class JJSNetworkRequest: JJSBaseNetworkRequest {
         
         let parameters = self.parametersForSavedFileName ?? [String: Any]()
         let parametersString = "Parameters:\(parameters)"
-        let parametersStringMd5 = parametersString.jjs_md5String()
+        let parametersStringMd5 = parametersString.md5()
         cacheFileName += parametersStringMd5
         
         return cacheFileName

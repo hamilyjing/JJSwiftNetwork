@@ -1,21 +1,24 @@
 PODS:
   - Alamofire (4.3.0)
+  - CryptoSwift (0.6.7)
   - HandyJSON (1.5.2)
   - JJSwiftTool (1.0.4)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.3.0)
+  - CryptoSwift
   - HandyJSON (~> 1.5.2)
   - JJSwiftTool
   - SwiftyJSON (~> 3.1.4)
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  CryptoSwift: 685ae257941e5447474348a2b545583e1a16b573
   HandyJSON: bb5597b375370dbe4312a27e696341b1f65e4fd7
   JJSwiftTool: 9499a4d5d9b384d353b12852ab1cbe9a2748f3bb
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: eeb818630d699564357ca8ad2c580562e243b6af
+PODFILE CHECKSUM: 099f540278a059b8fae56613881915a7f66f6942
 
 COCOAPODS: 1.2.0.beta.1
