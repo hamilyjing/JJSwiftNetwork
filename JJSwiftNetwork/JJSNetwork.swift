@@ -57,8 +57,7 @@ open class JJSNetwork: JJSBaseNetwork {
         }
         
         oldCacheObject = cacheObject()
-        var newObject = convertToObject(filterResponseString())
-        newObject = responseOperation(newObject: newObject, oldObject: oldCacheObject)
+        let newObject = currentResponseObject()
         
         if !successForBussiness(newObject) {
             return
