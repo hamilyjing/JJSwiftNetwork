@@ -10,7 +10,7 @@ import XCTest
 
 @testable import JJSwiftNetwork
 
-public class JJSWeatherNetwork: JJSNetwork {
+public class JJSWeatherNetwork: JJSNetworkRequest {
     
     public override func requestHostURL() -> String {
         return "https://apis.baidu.com"

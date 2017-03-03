@@ -10,7 +10,7 @@ import UIKit
 
 open class JJSService: NSObject {
     
-    open func startRequest(request: JJSNetwork) {
+    open func startRequest(request: JJSNetworkRequest) {
         
     }
     

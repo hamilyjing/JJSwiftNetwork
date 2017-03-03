@@ -1,5 +1,5 @@
 //
-//  JJSNetwork.swift
+//  JJSNetworkRequest.swift
 //  iOS Example
 //
 //  Created by JJ on 2/20/17.
@@ -12,7 +12,7 @@ import HandyJSON
 import SwiftyJSON
 import JJSwiftTool
 
-open class JJSNetwork: JJSBaseNetwork {
+open class JJSNetworkRequest: JJSBaseNetworkRequest {
     
     var isSaveToMemory: Bool = false
     var isSaveToDisk: Bool = false
