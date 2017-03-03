@@ -11,12 +11,15 @@
 		286DD0CA1E67F0CA001F8C6A /* JJSWeatherNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DD0C91E67F0CA001F8C6A /* JJSWeatherNetwork.swift */; };
 		286DD0CD1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DD0CC1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift */; };
 		286DD0D01E693B19001F8C6A /* JJSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DD0CF1E693B19001F8C6A /* JJSService.swift */; };
+		286DD0D21E695113001F8C6A /* JJSWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DD0D11E695113001F8C6A /* JJSWeatherService.swift */; };
 		289026BD1E56D8E900932F3A /* JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */; };
 		289026C21E56D8E900932F3A /* JJSwiftNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */; };
 		289026C41E56D8E900932F3A /* JJSwiftNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 289026B61E56D8E900932F3A /* JJSwiftNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		289026CE1E56DFA900932F3A /* JJSBaseNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289026CD1E56DFA900932F3A /* JJSBaseNetworkRequest.swift */; };
 		28DF21C01E5FCE4900D8E11F /* JJSNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF21BF1E5FCE4900D8E11F /* JJSNetworkRequest.swift */; };
 		28DF21C21E5FCE5700D8E11F /* JJSNetworkBaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */; };
+		28F680781E69559400852261 /* JJSWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F680771E69559400852261 /* JJSWeatherModel.swift */; };
+		28F6807A1E695E8900852261 /* JJSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F680791E695E8900852261 /* JJSResult.swift */; };
 		BC04C2C9E80A2688D4413E2A /* Pods_JJSwiftNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +40,7 @@
 		286DD0C91E67F0CA001F8C6A /* JJSWeatherNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSWeatherNetwork.swift; sourceTree = "<group>"; };
 		286DD0CC1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkJsonConvert.swift; sourceTree = "<group>"; };
 		286DD0CF1E693B19001F8C6A /* JJSService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSService.swift; sourceTree = "<group>"; };
+		286DD0D11E695113001F8C6A /* JJSWeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSWeatherService.swift; sourceTree = "<group>"; };
 		289026B31E56D8E900932F3A /* JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289026B61E56D8E900932F3A /* JJSwiftNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJSwiftNetwork.h; sourceTree = "<group>"; };
 		289026B71E56D8E900932F3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +50,8 @@
 		289026CD1E56DFA900932F3A /* JJSBaseNetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSBaseNetworkRequest.swift; sourceTree = "<group>"; };
 		28DF21BF1E5FCE4900D8E11F /* JJSNetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkRequest.swift; sourceTree = "<group>"; };
 		28DF21C11E5FCE5700D8E11F /* JJSNetworkBaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSNetworkBaseObject.swift; sourceTree = "<group>"; };
+		28F680771E69559400852261 /* JJSWeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSWeatherModel.swift; sourceTree = "<group>"; };
+		28F680791E695E8900852261 /* JJSResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJSResult.swift; sourceTree = "<group>"; };
 		71CE4875345C51E4AB562CB7 /* Pods_JJSwiftNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9445FC887F4C649A488CBCF /* Pods-JJSwiftNetworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JJSwiftNetworkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JJSwiftNetworkTests/Pods-JJSwiftNetworkTests.release.xcconfig"; sourceTree = "<group>"; };
 		DE62BB6966FF4CEAF1AC1B2A /* Pods_JJSwiftNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JJSwiftNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				286DD0CF1E693B19001F8C6A /* JJSService.swift */,
+				28F680791E695E8900852261 /* JJSResult.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -131,6 +138,8 @@
 				289026C31E56D8E900932F3A /* Info.plist */,
 				286DD0C91E67F0CA001F8C6A /* JJSWeatherNetwork.swift */,
 				289026C11E56D8E900932F3A /* JJSwiftNetworkTests.swift */,
+				286DD0D11E695113001F8C6A /* JJSWeatherService.swift */,
+				28F680771E69559400852261 /* JJSWeatherModel.swift */,
 			);
 			path = JJSwiftNetworkTests;
 			sourceTree = "<group>";
@@ -342,6 +351,7 @@
 				286DD0CD1E690D6E001F8C6A /* JJSNetworkJsonConvert.swift in Sources */,
 				28DF21C21E5FCE5700D8E11F /* JJSNetworkBaseObject.swift in Sources */,
 				286DD0D01E693B19001F8C6A /* JJSService.swift in Sources */,
+				28F6807A1E695E8900852261 /* JJSResult.swift in Sources */,
 				289026CE1E56DFA900932F3A /* JJSBaseNetworkRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +360,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28F680781E69559400852261 /* JJSWeatherModel.swift in Sources */,
+				286DD0D21E695113001F8C6A /* JJSWeatherService.swift in Sources */,
 				289026C21E56D8E900932F3A /* JJSwiftNetworkTests.swift in Sources */,
 				286DD0CA1E67F0CA001F8C6A /* JJSWeatherNetwork.swift in Sources */,
 			);

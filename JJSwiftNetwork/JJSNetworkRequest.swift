@@ -11,23 +11,27 @@ import UIKit
 import HandyJSON
 import SwiftyJSON
 import JJSwiftTool
+import Alamofire
 
 open class JJSNetworkRequest: JJSBaseNetworkRequest {
     
     var isSaveToMemory: Bool = false
     var isSaveToDisk: Bool = false
     
-    private var oldCacheObject: JJSNetworkBaseObjectProtocol?
-    private var newCacheObject: JJSNetworkBaseObjectProtocol?
-    
+    var identity: String?
     var userCacheDirectory: String?
     var sensitiveDataForSavedFileName: String?
     var parametersForSavedFileName: [String: Any]?
-    var identity: String?
+    var otherInfo = [String: Any]()
+    
+    var responseCallback: ((JJSResult<JJSNetworkBaseObjectProtocol>, [String: Any]) -> Void)?
     
     var operation: ((JJSNetworkBaseObjectProtocol?, JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol?)?
     
     var jsonConvert: JJSNetworkJsonConvertProtocol?
+    
+    private var oldCacheObject: JJSNetworkBaseObjectProtocol?
+    private var newCacheObject: JJSNetworkBaseObjectProtocol?
     
     // MARK: -
     // MARK: lifecycle
@@ -52,6 +56,8 @@ open class JJSNetworkRequest: JJSBaseNetworkRequest {
     override open func requestCompleteFilter() {
         super.requestCompleteFilter()
         
+        otherInfo["responseString"] = self.responseString
+        
         if !isSaveToMemory && !isSaveToDisk {
             return
         }
@@ -74,6 +80,8 @@ open class JJSNetworkRequest: JJSBaseNetworkRequest {
     
     override open func requestFailedFilter() {
         super.requestFailedFilter()
+        
+        otherInfo["responseString"] = self.responseString
         
         processAbnormalStatus()
     }

@@ -12,16 +12,6 @@ import HandyJSON
 
 @testable import JJSwiftNetwork
 
-class JJWeatherModel: JJSNetworkBaseObject {
-    
-    var errNum: Int64?
-    var errMsg: String?
-    
-    open override func successForBussiness() -> Bool {
-        return true
-    }
-}
-
 class JJSwiftNetworkTests: XCTestCase {
     
     let timeout: TimeInterval = 30.0
@@ -42,21 +32,33 @@ class JJSwiftNetworkTests: XCTestCase {
         
         let expectation = self.expectation(description: "myExpectation")
         
-        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather", isSaveToMemory: false, isSaveToDisk: true, jsonConvert: JJSNetworkJsonConvert<JJWeatherModel>())
-        weatherNetwork.successCompletionBlock = { baseNetwork in
-            print("success")
-            let object = weatherNetwork.currentResponseObject()
-            if let object1 = object as? JJWeatherModel {
-                print(object1.errNum ?? Int64(0))
-                print(object1.errMsg ?? "1234")
+        JJSWeatherService().requestWeather { (result, otherInfo) in
+            if result.isSuccess {
+                let object = result.value as! JJSWeatherModel
+                print(object)
+                expectation.fulfill()
+            } else {
+                let error = result.error!
+                print(error)
+                expectation.fulfill()
             }
-            expectation.fulfill()
         }
-        weatherNetwork.failureCompletionBlock = { baseNetwork in
-            print("fail")
-            expectation.fulfill()
-        }
-        weatherNetwork.start()
+        
+//        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather", isSaveToMemory: false, isSaveToDisk: true, jsonConvert: JJSNetworkJsonConvert<JJWeatherModel>())
+//        weatherNetwork.successCompletionBlock = { baseNetwork in
+//            print("success")
+//            let object = weatherNetwork.currentResponseObject()
+//            if let object1 = object as? JJWeatherModel {
+//                print(object1.errNum ?? Int64(0))
+//                print(object1.errMsg ?? "1234")
+//            }
+//            expectation.fulfill()
+//        }
+//        weatherNetwork.failureCompletionBlock = { baseNetwork in
+//            print("fail")
+//            expectation.fulfill()
+//        }
+//        weatherNetwork.start()
         
         waitForExpectations(timeout: timeout)
     }
