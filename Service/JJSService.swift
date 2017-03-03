@@ -41,12 +41,13 @@ open class JJSService: NSObject {
     open func postResponseNotification(success: Bool, object: JJSNetworkBaseObjectProtocol?, request: JJSNetworkRequest) {
         var userInfo = [String: Any]()
         userInfo["success"] = success
+        userInfo["identity"] = request.identity
         userInfo["parameter"] = request.httpParameters
         userInfo["object"] = object
         userInfo["error"] = request.responseError
         userInfo["otherInfo"] = request.otherInfo
         
-        let notificationName = "\(self.classForCoder)_\(request.identity)"
+        let notificationName = "\(self.classForCoder)_\(request.identity != nil ? request.identity! : request.buildRequestURL())"
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationName), object: self, userInfo: userInfo)
     }
     
