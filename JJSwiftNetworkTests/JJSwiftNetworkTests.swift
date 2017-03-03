@@ -42,23 +42,21 @@ class JJSwiftNetworkTests: XCTestCase {
         
         let expectation = self.expectation(description: "myExpectation")
         
-        let network = JJSNetwork<JJWeatherModel>()
-        //network.hostURL = "https://apis.baidu.com/showapi_open_bus/weather_showapi/areaid"
-        network.isSaveToDisk = true
-        network.successCompletionBlock = { baseNetwork in
+        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather", isSaveToMemory: false, isSaveToDisk: true, convertObject: JJSNetworkConvertObject<JJWeatherModel>())
+        weatherNetwork.successCompletionBlock = { baseNetwork in
             print("success")
-            let object = network.currentResponseObject()
+            let object = weatherNetwork.currentResponseObject()
             if let object1 = object as? JJWeatherModel {
                 print(object1.errNum ?? Int64(0))
                 print(object1.errMsg ?? "1234")
             }
             expectation.fulfill()
         }
-        network.failureCompletionBlock = { baseNetwork in
+        weatherNetwork.failureCompletionBlock = { baseNetwork in
             print("fail")
             expectation.fulfill()
         }
-        network.start()
+        weatherNetwork.start()
         
         waitForExpectations(timeout: timeout)
     }

@@ -10,6 +10,13 @@ import XCTest
 
 @testable import JJSwiftNetwork
 
-//class JJSWeatherNetwork: JJSNetwork<T: JJSNetworkBaseObjectProtocol> {
-//
-//}
+public class JJSWeatherNetwork: JJSNetwork {
+    
+    public override func requestHostURL() -> String {
+        return "https://apis.baidu.com"
+    }
+    
+    public override func requestPathURL() -> String {
+        return "/showapi_open_bus/weather_showapi/areaid"
+    }
+}

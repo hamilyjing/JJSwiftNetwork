@@ -12,7 +12,7 @@ import HandyJSON
 import SwiftyJSON
 import JJSwiftTool
 
-open class JJSNetwork<T: JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
+open class JJSNetwork: JJSBaseNetwork {
     
     var isSaveToMemory: Bool = false
     var isSaveToDisk: Bool = false
@@ -27,13 +27,15 @@ open class JJSNetwork<T: JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     
     var operation: ((JJSNetworkBaseObjectProtocol?, JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol?)?
     
+    var convertObject: JJSNetworkConvertObjectProtocol?
+    
     // MARK: -
     // MARK: lifecycle
     
     override init() {
     }
     
-    required public init(parameters: [String: Any]?, identity: String?, isSaveToMemory: Bool, isSaveToDisk: Bool) {
+    required public init(parameters: [String: Any]?, identity: String?, isSaveToMemory: Bool, isSaveToDisk: Bool, convertObject: JJSNetworkConvertObjectProtocol?) {
         super.init()
         
         self.httpParameters = parameters
@@ -41,6 +43,7 @@ open class JJSNetwork<T: JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         self.isSaveToMemory = isSaveToMemory
         self.isSaveToDisk = isSaveToDisk
         self.parametersForSavedFileName = self.httpParameters
+        self.convertObject = convertObject
     }
     
     // MARK: -
@@ -88,50 +91,7 @@ open class JJSNetwork<T: JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
     }
     
     open func convertToObject(_ resoponseString: String?) -> JJSNetworkBaseObjectProtocol? {
-        guard resoponseString != nil else {
-            return nil
-        }
-        
-        let json = JSON(parseJSON: resoponseString!)
-        let resoponseDic = json.dictionaryObject
-        if nil == resoponseDic {
-            return nil
-        }
-        
-        let convertObject = getConvertObjectContent(resoponseDic!)
-        
-        var resultObject: T?
-        
-        switch convertObject {
-        case let object as [String : Any] where object.count > 0:
-            resultObject = JSONDeserializer<T>.deserializeFrom(dict: object as NSDictionary?)
-        case let object as [Any] where object.count > 0:
-            let json = JSON(object)
-            let jsonString = json.rawString()
-            let objectArray = JSONDeserializer<T>.deserializeModelArrayFrom(json: jsonString)
-            var resultArray = [T]()
-            if let tempObjectArray = objectArray {
-                for item in tempObjectArray {
-                    if let tempItem = item {
-                        resultArray.append(tempItem)
-                    }
-                }
-            }
-            resultObject = T.init()
-            resultObject?.responseResultArray = resultArray
-        case let object as String:
-            resultObject = T.init()
-            resultObject?.responseResultString = object
-        default:
-            resultObject = T.init()
-        }
-        
-        if let object = resultObject {
-            object.setData(resoponseDic!)
-            return object
-        } else {
-            return nil
-        }
+        return self.convertObject?.convertToObject(jsonString: resoponseString)
     }
     
     open func responseOperation(newObject: JJSNetworkBaseObjectProtocol?, oldObject: JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol? {
@@ -209,7 +169,7 @@ open class JJSNetwork<T: JJSNetworkBaseObjectProtocol>: JJSBaseNetwork {
         }
         
         let savedString = data!.jjs_string()
-        let object = JSONDeserializer<T>.deserializeFrom(json: savedString)
+        let object = self.convertObject?.deserializeFrom(jsonString: savedString)
         
         if isSaveToMemory {
             newCacheObject = object
