@@ -1,5 +1,5 @@
 //
-//  JJSBaseNetworkRequest.swift
+//  JJSNetworkBaseRequest.swift
 //  JJSwiftNetwork
 //
 //  Created by JJ on 2/17/17.
@@ -10,10 +10,10 @@ import UIKit
 
 import Alamofire
 
-open class JJSBaseNetworkRequest {
+open class JJSNetworkBaseRequest {
     
-    var successCompletionBlock: ((JJSBaseNetworkRequest) -> Void)?
-    var failureCompletionBlock: ((JJSBaseNetworkRequest) -> Void)?
+    var successCompletionBlock: ((JJSNetworkBaseRequest) -> Void)?
+    var failureCompletionBlock: ((JJSNetworkBaseRequest) -> Void)?
     
     var httpRequest: Request?
     var httpParameters: [String: Any]?
@@ -78,7 +78,7 @@ open class JJSBaseNetworkRequest {
         self.httpRequest = request
     }
     
-    func start(successCompletionBlock: ((JJSBaseNetworkRequest) -> Void)?, failureCompletionBlock: ((JJSBaseNetworkRequest) -> Void)?) {
+    func start(successCompletionBlock: ((JJSNetworkBaseRequest) -> Void)?, failureCompletionBlock: ((JJSNetworkBaseRequest) -> Void)?) {
         self.successCompletionBlock = successCompletionBlock
         self.failureCompletionBlock = failureCompletionBlock
         

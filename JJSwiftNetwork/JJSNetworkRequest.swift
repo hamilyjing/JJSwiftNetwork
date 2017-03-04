@@ -14,7 +14,7 @@ import JJSwiftTool
 import Alamofire
 import CryptoSwift
 
-open class JJSNetworkRequest: JJSBaseNetworkRequest {
+open class JJSNetworkRequest: JJSNetworkBaseRequest {
     
     var isSaveToMemory: Bool = false
     var isSaveToDisk: Bool = false
