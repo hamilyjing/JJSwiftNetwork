@@ -13,34 +13,17 @@ import HandyJSON
 
 public protocol JJSNetworkJsonConvertProtocol {
     
-    func getConvertObjectContent(_ resoponseDic: [String : Any]) -> Any
-    func convertToObject(jsonString: String?) -> JJSNetworkBaseObjectProtocol?
+    func convertToObject(jsonObject: Any) -> JJSNetworkBaseObjectProtocol?
     
     func deserializeFrom(jsonString: String?) -> JJSNetworkBaseObjectProtocol?
 }
 
 public class JJSNetworkJsonConvert<T: JJSNetworkBaseObjectProtocol>: JJSNetworkJsonConvertProtocol {
     
-    public func getConvertObjectContent(_ resoponseDic: [String : Any]) -> Any {
-        return resoponseDic;
-    }
-    
-    public func convertToObject(jsonString: String?) -> JJSNetworkBaseObjectProtocol? {
-        guard jsonString != nil else {
-            return nil
-        }
-        
-        let json = JSON(parseJSON: jsonString!)
-        let resoponseDic = json.dictionaryObject
-        if nil == resoponseDic {
-            return nil
-        }
-        
-        let convertObject = getConvertObjectContent(resoponseDic!)
-        
+    public func convertToObject(jsonObject: Any) -> JJSNetworkBaseObjectProtocol? {
         var resultObject: T?
         
-        switch convertObject {
+        switch jsonObject {
         case let object as [String : Any] where object.count > 0:
             resultObject = JSONDeserializer<T>.deserializeFrom(dict: object as NSDictionary?)
         case let object as [Any] where object.count > 0:
@@ -64,12 +47,7 @@ public class JJSNetworkJsonConvert<T: JJSNetworkBaseObjectProtocol>: JJSNetworkJ
             resultObject = T.init()
         }
         
-        if let object = resultObject {
-            object.setData(resoponseDic!)
-            return object
-        } else {
-            return nil
-        }
+        return resultObject
     }
     
     public func deserializeFrom(jsonString: String?) -> JJSNetworkBaseObjectProtocol? {

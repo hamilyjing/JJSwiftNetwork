@@ -94,12 +94,50 @@ open class JJSNetworkRequest: JJSNetworkBaseRequest {
         return responseString
     }
     
-    open func getConvertObjectContent(_ resoponseDic: [String : Any]) -> Any {
+    open func getConvertObjectContent(_ resoponseDic: Any) -> Any {
         return resoponseDic;
     }
     
     open func convertToObject(_ resoponseString: String?) -> JJSNetworkBaseObjectProtocol? {
-        return self.jsonConvert?.convertToObject(jsonString: resoponseString)
+        let jsonObject = actionBeforeConvertToObject(resoponseString)
+        if nil == jsonObject {
+            return nil
+        }
+        
+        let convertObject = self.jsonConvert?.convertToObject(jsonObject: jsonObject!)
+        if nil == convertObject {
+            return nil
+        }
+        
+        let object = actionAfterConvertToObject(convertObject!, resoponseString: resoponseString!)
+        return object
+    }
+    
+    open func actionBeforeConvertToObject(_ resoponseString: String?) -> Any? {
+        guard resoponseString != nil else {
+            return nil
+        }
+        
+        let json = JSON(parseJSON: resoponseString!)
+        let resoponseDic = json.dictionaryObject
+        if nil == resoponseDic {
+            return nil
+        }
+        
+        let jsonObject = getConvertObjectContent(resoponseDic!)
+        return jsonObject
+    }
+    
+    open func actionAfterConvertToObject(_ object: JJSNetworkBaseObjectProtocol, resoponseString: String) -> JJSNetworkBaseObjectProtocol {
+        let json = JSON(parseJSON: resoponseString)
+        let resoponseDic = json.dictionaryObject
+        if nil == resoponseDic {
+            return object
+        }
+        
+        object.setData(resoponseDic!)
+        
+        return object
     }
     
     open func responseOperation(newObject: JJSNetworkBaseObjectProtocol?, oldObject: JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol? {

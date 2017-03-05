@@ -36,12 +36,12 @@ class JJSwiftNetworkTests: XCTestCase {
             if result.isSuccess {
                 let object = result.value as! JJSWeatherModel
                 print(object)
-                expectation.fulfill()
             } else {
                 let error = result.error!
                 print(error)
-                expectation.fulfill()
             }
+            
+            expectation.fulfill()
         }
         
 //        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather", isSaveToMemory: false, isSaveToDisk: true, jsonConvert: JJSNetworkJsonConvert<JJWeatherModel>())
