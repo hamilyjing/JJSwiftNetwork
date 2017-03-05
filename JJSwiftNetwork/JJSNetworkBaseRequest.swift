@@ -102,6 +102,10 @@ open class JJSNetworkBaseRequest {
         return urlString
     }
     
+    open func filterResponseString() -> String? {
+        return responseString
+    }
+    
     func handleRequestResult(_ response: HTTPURLResponse?, _ result: Result<String>) {
         self.response = response
         self.responseString = result.value
