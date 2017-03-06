@@ -16,20 +16,20 @@ import CryptoSwift
 
 open class JJSNetworkRequest: JJSNetworkBaseRequest {
     
-    var isSaveToMemory: Bool = false
-    var isSaveToDisk: Bool = false
+    public var isSaveToMemory: Bool = false
+    public var isSaveToDisk: Bool = false
     
-    var identity: String?
-    var userCacheDirectory: String?
-    var sensitiveDataForSavedFileName: String?
-    var parametersForSavedFileName: [String: Any]?
-    var otherInfo = [String: Any]()
+    public var identity: String?
+    public var userCacheDirectory: String?
+    public var sensitiveDataForSavedFileName: String?
+    public var parametersForSavedFileName: [String: Any]?
+    public var otherInfo = [String: Any]()
     
-    var responseCallback: ((JJSResult<JJSNetworkBaseObjectProtocol>, [String: Any]) -> Void)?
+    public var responseCallback: ((JJSResult<JJSNetworkBaseObjectProtocol>, [String: Any]) -> Void)?
     
-    var operation: ((JJSNetworkBaseObjectProtocol?, JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol?)?
+    public var operation: ((JJSNetworkBaseObjectProtocol?, JJSNetworkBaseObjectProtocol?) -> JJSNetworkBaseObjectProtocol?)?
     
-    var jsonConvert: JJSNetworkJsonConvertProtocol?
+    public var jsonConvert: JJSNetworkJsonConvertProtocol?
     
     private var oldCacheObject: JJSNetworkBaseObjectProtocol?
     private var newCacheObject: JJSNetworkBaseObjectProtocol?

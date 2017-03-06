@@ -20,6 +20,9 @@ public protocol JJSNetworkJsonConvertProtocol {
 
 public class JJSNetworkJsonConvert<T: JJSNetworkBaseObjectProtocol>: JJSNetworkJsonConvertProtocol {
     
+    public init() {
+    }
+    
     public func convertToObject(jsonObject: Any) -> JJSNetworkBaseObjectProtocol? {
         var resultObject: T?
         
