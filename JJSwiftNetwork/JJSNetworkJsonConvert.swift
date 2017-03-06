@@ -51,7 +51,22 @@ public class JJSNetworkJsonConvert<T: JJSNetworkBaseObjectProtocol>: JJSNetworkJ
     }
     
     public func deserializeFrom(jsonString: String?) -> JJSNetworkBaseObjectProtocol? {
-        let object = JSONDeserializer<T>.deserializeFrom(json: jsonString)
+        var object = JSONDeserializer<T>.deserializeFrom(json: jsonString)
+        if nil == object {
+            return nil
+        }
+        
+        if let array = object!.responseResultArray {
+            var resultArray = [T]()
+            for item in array {
+                let tempObject = JSONDeserializer<T>.deserializeFrom(dict: item as? NSDictionary)
+                resultArray.append(tempObject!)
+            }
+            if resultArray.count > 0 {
+                object!.responseResultArray = resultArray
+            }
+        }
+        
         return object
     }
 }

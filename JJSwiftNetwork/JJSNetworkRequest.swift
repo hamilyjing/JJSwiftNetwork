@@ -90,10 +90,6 @@ open class JJSNetworkRequest: JJSNetworkBaseRequest {
     // MARK: -
     // MARK: response operation
     
-    open func filterResponseString() -> String? {
-        return responseString
-    }
-    
     open func getConvertObjectContent(_ resoponseDic: Any) -> Any {
         return resoponseDic;
     }
