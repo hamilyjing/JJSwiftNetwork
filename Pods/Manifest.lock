@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.3.0)
   - CryptoSwift (0.6.8)
   - HandyJSON (1.6.1)
-  - JJSwiftTool (1.0.5)
+  - JJSwiftTool (1.0.6)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -16,7 +16,7 @@ SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   CryptoSwift: f21ea03ed3a94e79d241648ce26652cd4810508a
   HandyJSON: dcc98115467462a4749db81bc8a9052607600bdf
-  JJSwiftTool: e2ebe10d25e01a9d2c56ec328cf86bf6e290f847
+  JJSwiftTool: 1e5e9c9f47d6641203f39f0bf823477c1e70dad2
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
 PODFILE CHECKSUM: 0bb07fb830c610adc4790ac3bd3ce46481beb93d

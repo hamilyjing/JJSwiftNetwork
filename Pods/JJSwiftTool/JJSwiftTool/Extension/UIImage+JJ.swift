@@ -139,13 +139,13 @@ extension UIImage {
         {
             case .down, .downMirrored:
                 transform = transform.translatedBy(x: self.size.width, y: self.size.height)
-                transform = transform.rotated(by: CGFloat(M_PI))
+                transform = transform.rotated(by: CGFloat(Double.pi))
             case .left, .leftMirrored:
                 transform = transform.translatedBy(x: self.size.width, y: 0.0)
-                transform = transform.rotated(by: CGFloat(M_PI_2))
+                transform = transform.rotated(by: CGFloat(Double.pi / 2))
             case .right, .rightMirrored:
                 transform = transform.translatedBy(x: 0.0, y: self.size.height)
-                transform = transform.rotated(by: CGFloat(-M_PI_2))
+                transform = transform.rotated(by: CGFloat(-(Double.pi / 2)))
             case .up, .upMirrored:
                 break
         }

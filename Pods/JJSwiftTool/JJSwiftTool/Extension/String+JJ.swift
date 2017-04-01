@@ -227,7 +227,7 @@ extension String {
     public func jjs_UUID() -> String? {
         let uuidRef = CFUUIDCreate(kCFAllocatorNull)
         let uuid = CFUUIDCreateString(kCFAllocatorNull, uuidRef)
-        let uuidString = uuid as? String
+        let uuidString = uuid as String?
         return uuidString
     }
     
@@ -741,14 +741,17 @@ extension String {
     }
     
     public func jjs_urlEncodeUsingEncoding(encoding: CFStringEncoding) -> String? {
-        let encodedCFString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, self as CFString, nil, "?!@#$^&%*+,:;='\"`<>()[]{}/\\| " as CFString!, encoding)
-        let encodedString = encodedCFString as? String
+        
+        let encodedCFString = CFURLCreateStringByReplacingPercentEscapes(kCFAllocatorDefault, self as CFString, "?!@#$^&%*+,:;='\"`<>()[]{}/\\| " as CFString!)
+        //let encodedCFString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, self as CFString, nil, "?!@#$^&%*+,:;='\"`<>()[]{}/\\| " as CFString!, encoding)
+        let encodedString = encodedCFString as String?
         return encodedString
     }
     
     public func jjs_urlDecodeUsingEncoding(encoding: CFStringEncoding) -> String? {
-        let decodedCFString = CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault, self as CFString, "" as CFString!, encoding)
-        let decodedString = decodedCFString as? String
+        let decodedCFString = CFURLCreateStringByReplacingPercentEscapes(kCFAllocatorDefault, self as CFString, "" as CFString!)
+        //let decodedCFString = CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault, self as CFString, "" as CFString!, encoding)
+        let decodedString = decodedCFString as String?
         if let newString = decodedString {
             return newString.replacingOccurrences(of: "+", with: "")
         }
