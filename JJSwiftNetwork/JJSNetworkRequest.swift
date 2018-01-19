@@ -12,7 +12,7 @@ import HandyJSON
 import SwiftyJSON
 import JJSwiftTool
 import Alamofire
-import CryptoSwift
+//import CryptoSwift
 
 open class JJSNetworkRequest: JJSNetworkBaseRequest {
     
@@ -190,7 +190,7 @@ open class JJSNetworkRequest: JJSNetworkBaseRequest {
         
         let parameters = self.parametersForSavedFileName ?? [String: Any]()
         let parametersString = "Parameters:\(parameters)"
-        let parametersStringMd5 = parametersString.md5()
+        let parametersStringMd5 = parametersString; //TODO: parametersString.md5()
         cacheFileName += parametersStringMd5
         
         return cacheFileName

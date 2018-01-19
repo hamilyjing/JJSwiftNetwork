@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "JJSwiftNetwork"
-  s.version      = "1.0.4"
+  s.version      = "1.0.5"
   s.summary      = "iOS swift network framework"
   s.homepage     = "https://github.com/hamilyjing/JJSwiftNetwork"
   s.license      = "MIT"
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/hamilyjing/JJSwiftNetwork.git", :tag => s.version }
   s.source_files  = "JJSwiftNetwork", "JJSwiftNetwork/**/*.{swift,h,m}"
 
-  s.dependency "CryptoSwift", "~> 0.6.8"
+  #s.dependency "CryptoSwift", "~> 0.6.8"
   s.dependency "Alamofire", "~> 4.3.0"
   s.dependency "SwiftyJSON", "~> 3.1.4"
   s.dependency "HandyJSON", "~> 1.6.1"
