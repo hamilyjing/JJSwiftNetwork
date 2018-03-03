@@ -13,7 +13,7 @@ import UIKit
 public class JJSWeatherService: JJSService {
     
     public func requestWeather(responseCallback: ((JJSResult<JJSNetworkBaseObjectProtocol>, [String: Any]) -> Void)?) {
-        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather", isSaveToMemory: false, isSaveToDisk: true, jsonConvert: JJSNetworkJsonConvert<JJSWeatherModel>())
+        let weatherNetwork = JJSWeatherNetwork(parameters: nil, identity: "getWeather1", isSaveToMemory: false, isSaveToDisk: true, jsonConvert: JJSNetworkJsonConvert<JJSWeatherModel>())
         weatherNetwork.responseCallback = responseCallback
         startRequest(request: weatherNetwork)
     }

@@ -64,7 +64,7 @@ open class JJSNetworkRequest: JJSNetworkBaseRequest {
         }
         
         oldCacheObject = cacheObject()
-        let newObject = currentResponseObject()
+        let newObject = currentResponseObject(filterResponseString())
         
         if !successForBussiness(newObject) {
             return
@@ -217,11 +217,15 @@ open class JJSNetworkRequest: JJSNetworkBaseRequest {
             newCacheObject = object
         }
         
+        if let tempObject = object {
+            newCacheObject = tempObject
+        }
+        
         return object
     }
     
-    open func currentResponseObject() -> JJSNetworkBaseObjectProtocol? {
-        var object = convertToObject(filterResponseString())
+    open func currentResponseObject(_ resoponseString: String?) -> JJSNetworkBaseObjectProtocol? {
+        var object = convertToObject(resoponseString)
         object = responseOperation(newObject: object, oldObject: oldCacheObject)
         return object
     }

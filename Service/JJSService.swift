@@ -12,7 +12,7 @@ open class JJSService: NSObject {
     
     open func startRequest(request: JJSNetworkRequest, successAction: ((JJSNetworkBaseObjectProtocol, JJSNetworkRequest) -> Void)? = nil, failAcction: ((Error, JJSNetworkRequest) -> Void)? = nil) {
         request.successCompletionBlock = { baseRequest in
-            let object = request.currentResponseObject()!
+            let object = request.currentResponseObject(baseRequest.filterResponseString())!
             successAction?(object, request)
             
             self.handleResponseResult(success: true, object: object, request: request)
